@@ -1,3 +1,5 @@
+require 'pry'
+
 class Song
 
     attr_accessor :name, :artist, :genre
@@ -19,7 +21,6 @@ class Song
         @@all = []
     end
 
-
     def save
         @@all << self
     end
@@ -31,7 +32,6 @@ class Song
         song
     end
 
-    # why does artist(artist) not work?
     def artist=(artist)
         @artist = artist
         artist.add_song(self)
@@ -41,4 +41,16 @@ class Song
         @genre = genre
         genre.add_song(self)
     end
+
+    def self.find_by_name(name) 
+        @@all.detect do |song|
+            song.name == name
+        end
+    end
+
+    def self.find_or_create_by_name(name)
+        self.find_by_name(name) || self.create(name)       
+    end
+
+
 end
