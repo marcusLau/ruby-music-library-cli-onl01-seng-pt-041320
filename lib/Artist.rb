@@ -1,6 +1,6 @@
 class Artist
 
-    attr_accessor :name, :songs
+    attr_accessor :name, :songs, :genres
 
     @@all = []
 
@@ -37,4 +37,13 @@ class Artist
         end
     end
 
+    def genres
+        genres = []
+        @songs.each do |song|
+            if !genres.include?(song.genre)
+                genres << song.genre
+            end
+        end
+        genres
+    end
 end
