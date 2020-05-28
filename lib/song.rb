@@ -1,6 +1,7 @@
 require 'pry'
 
 class Song
+    extend Concerns::Findable
 
     attr_accessor :name
     attr_reader :artist, :genre
@@ -41,7 +42,8 @@ class Song
         @genre = genre
         genre.add_song(self)
     end
-
+    
+    """
     def self.find_by_name(name) 
         all.detect do |song| # self.all == all. Implicitly expressed in Ruby
             song.name == name
@@ -51,6 +53,6 @@ class Song
     def self.find_or_create_by_name(name)
         self.find_by_name(name) || self.create(name)       
     end
-
+    """
 
 end
