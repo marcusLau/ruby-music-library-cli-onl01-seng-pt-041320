@@ -2,13 +2,13 @@ require 'pry'
 
 class Song
 
-    attr_accessor :name, :artist, :genre
-
+    attr_accessor :name
+    attr_reader :artist, :genre
     @@all = []
 
     def initialize(name, artist=nil, genre=nil)
         @name = name
-        @@all << self
+        # @@all << self 
         self.artist = artist if artist != nil
         self.genre = genre if genre != nil
     end
@@ -43,7 +43,7 @@ class Song
     end
 
     def self.find_by_name(name) 
-        @@all.detect do |song|
+        all.detect do |song| # self.all == all. Implicitly expressed in Ruby
             song.name == name
         end
     end
