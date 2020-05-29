@@ -43,16 +43,23 @@ class Song
         genre.add_song(self)
     end
     
-    """
-    def self.find_by_name(name) 
-        all.detect do |song| # self.all == all. Implicitly expressed in Ruby
-            song.name == name
-        end
+    # Creates a new song while also updating artist/genre of the new song parameters.
+    def self.new_from_filename(file)
+        data = file.split(" - ")
+
+        name = data[1] 
+        artist_name = data[0]
+        genre_name = data[2].split(".mp3").join
+
+        artist = Artist.find_or_create_by_name(artist_name)
+        genre = Genre.find_or_create_by_name(genre_name)
+
+        self.new(name, artist, genre)
     end
 
-    def self.find_or_create_by_name(name)
-        self.find_by_name(name) || self.create(name)       
+    # initializes from filename and saves into @@all
+    def self.create_from_filename(file)
+        self.new_from_filename(file).save
     end
-    """
 
 end
